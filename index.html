@@ -1,0 +1,2338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Help & Support</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f7fb;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a1a2e;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      height: 100dvh;
+      background: #fff;
+      border-radius: 0;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @media (min-width: 500px) {
+      .container {
+        border-radius: 20px;
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
+        min-height: 400px;
+        height: 90vh;
+        height: 90dvh;
+      }
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      padding: 1.2rem 1.5rem;
+      color: #fff;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .header p {
+      font-size: 0.85rem;
+      opacity: 0.85;
+      margin-top: 0.2rem;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .home-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .home-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .home-btn-sm {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      transition: background 0.2s;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .home-btn-sm:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Options Screen */
+    .screen {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    .options-body {
+      flex: 1;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow-y: auto;
+    }
+
+    .options-body h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .options-body > p {
+      font-size: 0.9rem;
+      color: #888;
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      padding: 1.1rem 1.2rem;
+      margin-bottom: 0.8rem;
+      background: #f8f9ff;
+      border: 1.5px solid #e8eaff;
+      border-radius: 14px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #1a1a2e;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: left;
+    }
+
+    .option-btn:hover {
+      background: #eef2ff;
+      border-color: #4f46e5;
+      transform: translateX(4px);
+    }
+
+    .option-btn .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .option-btn .icon.withdrawal {
+      background: #fee2e2;
+    }
+
+    .option-btn .icon.account {
+      background: #dbeafe;
+    }
+
+    .option-btn .icon.promotion {
+      background: #d1fae5;
+    }
+
+    .option-btn .arrow {
+      margin-left: auto;
+      color: #bbb;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Chat Screen */
+    .chat-header {
+      background: #4f46e5;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: #fff;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .chat-header .back-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+
+    .chat-header .back-btn:hover {
+      opacity: 1;
+    }
+
+    .chat-header .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .chat-header .chat-title {
+      flex: 1;
+    }
+
+    .chat-header .chat-title h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .chat-header .chat-title p {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 1.2rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .msg {
+      max-width: 85%;
+      padding: 0.7rem 1rem;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      animation: msgIn 0.3s ease;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    @keyframes msgIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg.bot {
+      background: #f3f4f6;
+      color: #374151;
+      align-self: flex-start;
+      border-radius: 16px 16px 16px 4px;
+    }
+
+    .msg.user {
+      background: #4f46e5;
+      color: #fff;
+      align-self: flex-end;
+      border-radius: 16px 16px 4px 16px;
+      box-shadow: 0 2px 4px rgba(79, 70, 229, 0.15);
+    }
+
+    .msg.team {
+      background: #ecfdf5;
+      color: #047857;
+      align-self: flex-start;
+      border-radius: 16px 16px 16px 4px;
+      border: 1px solid #d1fae5;
+      box-shadow: 0 2px 4px rgba(4, 120, 87, 0.05);
+    }
+
+    .msg .s {
+      font-weight: 700;
+      font-size: 0.72rem;
+      display: block;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .msg.team .s {
+      color: #059669;
+    }
+
+    .msg.user .s {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .typing {
+      display: flex;
+      gap: 5px;
+      padding: 0.6rem 1rem;
+      background: #f0f0f8;
+      border-radius: 14px;
+      border-bottom-left-radius: 4px;
+      align-self: flex-start;
+      max-width: 70px;
+      animation: msgIn 0.3s ease;
+    }
+
+    .typing span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #bbb;
+      animation: typingBounce 1.2s infinite;
+    }
+
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-6px); }
+    }
+
+    .chat-input-area {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.6rem;
+      padding: 0.8rem 1rem;
+      border-top: 1px solid #eee;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .chat-input-area textarea {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+      height: 42px;
+      max-height: 120px;
+      line-height: 1.4;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+
+    .chat-input-area textarea:focus {
+      border-color: #4f46e5;
+    }
+
+    .chat-input-area .send-btn {
+      width: 42px;
+      height: 42px;
+      border: none;
+      background: #4f46e5;
+      color: #fff;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      flex-shrink: 0;
+      display: none;
+    }
+
+    .chat-input-area .send-btn.visible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-input-area .send-btn:hover {
+      background: #4338ca;
+    }
+
+    .chat-input-area .send-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .chat-input-area .attach-btn {
+      width: 42px;
+      height: 42px;
+      border: none;
+      background: #f0f0f8;
+      color: #666;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .chat-input-area .attach-btn:hover {
+      background: #e0e0ff;
+      color: #4f46e5;
+    }
+
+    .msg-image {
+      max-width: min(100%, 480px);
+      max-height: 80vh;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 1px solid #eee;
+    }
+
+    .msg.user .msg-image {
+      border-radius: 12px 12px 4px 4px;
+    }
+
+    .msg-image-caption {
+      padding: 0.35rem 0.5rem 0.25rem 0.5rem;
+      font-size: 0.82rem;
+      color: inherit;
+      line-height: 1.3;
+      word-wrap: break-word;
+      max-width: 210px;
+    }
+
+
+
+    /* Fullscreen image viewer */
+    .img-viewer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: #000;
+      flex-direction: column;
+    }
+
+    .img-viewer.show {
+      display: flex;
+    }
+
+    .img-viewer-top {
+      display: flex;
+      align-items: center;
+      padding: 0.6rem 1rem;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      gap: 0.8rem;
+      flex-shrink: 0;
+      z-index: 2;
+    }
+
+    .img-viewer-top .iv-back {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .img-viewer-top .iv-label {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-left: auto;
+    }
+
+    .img-viewer-body {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    .img-viewer-body img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      will-change: transform;
+    }
+
+    .img-viewer-body img.zoomed {
+      max-width: none;
+      max-height: none;
+    }
+
+
+
+    /* Image Editor Modal (WhatsApp-style) */
+    .img-editor {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: #000;
+    }
+
+    .img-editor.show {
+      display: block;
+    }
+
+    .ie-top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.8rem;
+      background: linear-gradient(rgba(0,0,0,0.7), transparent);
+    }
+
+    .ie-top-bar #ieCounter {
+      flex: 1;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .ie-btn {
+      width: 38px;
+      height: 38px;
+      border: none;
+      background: transparent;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .ie-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .ie-image-area {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      background: #111;
+    }
+
+    .ie-image-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: 56px 0 140px;
+      box-sizing: border-box;
+    }
+
+    .ie-image-wrap img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.2s;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .ie-canvas-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+      touch-action: none;
+      z-index: 10;
+    }
+
+    .ie-bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      padding-top: 24px;
+    }
+
+    .ie-tools {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+      padding: 0.4rem 0.5rem;
+      background: rgba(26, 26, 46, 0.85);
+    }
+
+    .ie-tool {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .ie-tool:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .ie-tool.active {
+      background: rgba(99, 102, 241, 0.25);
+      color: #818cf8;
+    }
+
+    .ie-colors {
+      position: absolute;
+      top: 56px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      z-index: 20;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
+      padding: 5px 4px;
+      border-radius: 10px;
+      transition: opacity 0.15s;
+    }
+
+    .ie-colors.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .ie-color-btn {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s;
+      padding: 0;
+    }
+
+    .ie-color-btn.active {
+      border-color: #818cf8;
+      transform: scale(1.3);
+      box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.3);
+    }
+
+    .ie-color-btn:hover {
+      transform: scale(1.2);
+    }
+
+    .ie-send-area {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.8rem;
+      background: rgba(26, 26, 46, 0.85);
+    }
+
+    .ie-send-area input {
+      flex: 1;
+      padding: 0.65rem 1rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.06);
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: #fff;
+      outline: none;
+    }
+
+    .ie-send-area input::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .ie-send-area input:focus {
+      border-color: rgba(99, 102, 241, 0.5);
+    }
+
+    .ie-send-btn {
+      width: 42px;
+      height: 42px;
+      border: none;
+      background: #4f46e5;
+      color: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .ie-send-btn:hover {
+      background: #4338ca;
+    }
+
+    .ie-tool-divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,0.12);
+      margin: 0 0.2rem;
+    }
+
+    .ie-tool-done {
+      color: #4ade80 !important;
+    }
+
+    .ie-tool-done:hover {
+      background: rgba(74, 222, 128, 0.15) !important;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Category Selection Screen -->
+  <div class="screen active" id="optionsScreen">
+    <div class="header">
+      <div class="header-top">
+        <a href="index.html" class="home-btn" title="Back to Home">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </a>
+        <div>
+          <h1>Help & Support</h1>
+          <p>Select your issue to start a conversation</p>
+      </div>
+    </div>
+    </div>
+    <div class="options-body">
+      <h2>How can we help you?</h2>
+      <p>Choose one of the options below</p>
+
+      <button class="option-btn" data-option="withdrawal">
+        <span class="icon withdrawal">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+            <line x1="1" y1="10" x2="23" y2="10"/>
+            <circle cx="8" cy="14" r="1.5" fill="currentColor"/>
+            <circle cx="16" cy="14" r="1.5" fill="currentColor"/>
+          </svg>
+        </span>
+        <span>Withdrawal Issue</span>
+        <span class="arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </span>
+      </button>
+
+      <button class="option-btn" data-option="account">
+        <span class="icon account">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            <circle cx="12" cy="16" r="1.2" fill="currentColor"/>
+          </svg>
+        </span>
+        <span>Account Issue</span>
+        <span class="arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </span>
+      </button>
+
+      <button class="option-btn" data-option="promotion">
+        <span class="icon promotion">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </span>
+        <span>Promotion / Marketing Help</span>
+        <span class="arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Chat Screen -->
+  <div class="screen" id="chatScreen">
+    <div class="chat-header">
+      <button class="back-btn" id="backBtn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+        </svg>
+      </button>
+      <div class="avatar" id="chatAvatar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </div>
+      <div class="chat-title">
+        <h3 id="chatTitle">Support</h3>
+        <p id="chatStatus">Online</p>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages"></div>
+
+
+
+    <div class="chat-input-area">
+      <button class="attach-btn" id="attachBtn" title="Send Image">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+      </button>
+      <input type="file" id="imageInput" accept="image/*" hidden />
+      <textarea id="chatInput" placeholder="Type your message..." autocomplete="off" rows="1"></textarea>
+      <button class="send-btn" id="sendBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Fullscreen Image Viewer -->
+<div class="img-viewer" id="imgViewer">
+  <div class="img-viewer-top">
+    <button class="iv-back" id="ivBack">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    </button>
+    <span id="ivTitle">Image</span>
+    <span class="iv-label" id="ivSender">You</span>
+  </div>
+  <div class="img-viewer-body">
+    <img id="ivImage" src="" alt="Full image" />
+  </div>
+</div>
+
+<!-- Image Editor Modal (WhatsApp-style) -->
+<div class="img-editor" id="imgEditor">
+  <div class="ie-top-bar">
+    <button class="ie-btn" id="ieBack" title="Back">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    </button>
+    <span id="ieCounter">1/1</span>
+    <button class="ie-btn" id="ieDeleteImg" title="Remove image">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+    </button>
+  </div>
+
+  <div class="ie-image-area" id="ieImageArea">
+    <div class="ie-image-wrap" id="ieImageWrap">
+      <img id="ieImage" src="" alt="Edit image" />
+    </div>
+    <div class="ie-colors hidden" id="ieColors">
+      <button class="ie-color-btn active" data-color="#ffffff" style="background:#ffffff;border-color:#ffffff"></button>
+      <button class="ie-color-btn" data-color="#000000" style="background:#000000"></button>
+      <button class="ie-color-btn" data-color="#ef4444" style="background:#ef4444"></button>
+      <button class="ie-color-btn" data-color="#f97316" style="background:#f97316"></button>
+      <button class="ie-color-btn" data-color="#eab308" style="background:#eab308"></button>
+      <button class="ie-color-btn" data-color="#22c55e" style="background:#22c55e"></button>
+      <button class="ie-color-btn" data-color="#3b82f6" style="background:#3b82f6"></button>
+      <button class="ie-color-btn" data-color="#a855f7" style="background:#a855f7"></button>
+      <button class="ie-color-btn" data-color="#ec4899" style="background:#ec4899"></button>
+    </div>
+  </div>
+
+  <div class="ie-bottom-bar">
+    <div class="ie-tools">
+      <button class="ie-tool" id="ieToolArrow" title="Arrow">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="12 5 19 5 19 12"/></svg>
+      </button>
+      <button class="ie-tool" id="ieToolUndo" title="Undo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+      </button>
+      <div class="ie-tool-divider"></div>
+      <button class="ie-tool ie-tool-done" id="ieToolDone">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+    </div>
+    <div class="ie-send-area">
+      <input type="text" id="ieCaption" placeholder="Add a caption..." autocomplete="off" />
+      <button class="ie-send-btn" id="ieSendBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+
+    // --- Ultra Strong Fingerprint ---
+    async function generateFingerprint() {
+      let stored = localStorage.getItem('user_fp');
+      if (stored) return stored;
+
+      const parts = [];
+
+      const push = v => parts.push(v === undefined || v === null ? '' : v);
+
+      // ── Navigator basics ──
+      push(navigator.userAgent);
+      push(navigator.language);
+      push(navigator.languages ? navigator.languages.join(',') : '');
+      push(navigator.platform);
+      push(navigator.product);
+      push(navigator.productSub);
+      push(navigator.vendor);
+      push(navigator.vendorSub || '');
+      push(navigator.appCodeName);
+      push(navigator.appName);
+      push(navigator.appVersion);
+      push(navigator.oscpu || '');
+      push(navigator.hardwareConcurrency);
+      push(navigator.deviceMemory);
+      push(navigator.maxTouchPoints);
+      push(!!navigator.mediaDevices);
+      push(!!navigator.bluetooth);
+      push(!!navigator.usb);
+      push(!!navigator.serial);
+      push(!!navigator.gpu);
+      push(!!navigator.wakeLock);
+      push(!!navigator.share);
+      push(navigator.doNotTrack);
+      push(navigator.cookieEnabled);
+      push(navigator.pdfViewerEnabled);
+      push(navigator.webdriver);
+
+      // ── Screen ──
+      push(screen.width, screen.height);
+      push(screen.availWidth, screen.availHeight);
+      push(screen.availLeft, screen.availTop);
+      push(screen.colorDepth, screen.pixelDepth);
+      push(screen.orientation ? screen.orientation.type : '');
+
+      // ── Time / Locale ──
+      push(new Date().getTimezoneOffset());
+      push(Intl.DateTimeFormat().resolvedOptions().timeZone);
+      push(Intl.DateTimeFormat().resolvedOptions().locale);
+      push(Intl.NumberFormat().resolvedOptions().locale);
+      push(new Date(0).toUTCString());
+      push(Intl.DateTimeFormat().format(new Date(2024,0,1,13,5,0)));
+
+      // ── Canvas 2D (complex) ──
+      try {
+        const c = document.createElement('canvas');
+        c.width = 320; c.height = 100;
+        const ctx = c.getContext('2d');
+
+        // Background gradient
+        const g = ctx.createLinearGradient(0,0,320,100);
+        g.addColorStop(0,'#f60'); g.addColorStop(0.5,'#06f'); g.addColorStop(1,'#0af');
+        ctx.fillStyle = g; ctx.fillRect(0,0,320,100);
+
+        // Shapes with shadow
+        ctx.shadowBlur = 6; ctx.shadowColor = 'rgba(0,0,0,0.5)';
+        ctx.beginPath(); ctx.arc(40,50,28,0,Math.PI*2); ctx.fillStyle='#fff'; ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Complex text with emoji
+        ctx.textBaseline = 'top'; ctx.font = '18px Arial';
+        ctx.fillStyle = '#111'; ctx.fillText('AdA@#$%✓🚀🧪∑π≈', 80, 8);
+
+        ctx.font = 'italic bold 14px "Times New Roman",serif';
+        ctx.fillStyle = '#eee'; ctx.fillText('fp∷' + screen.width + '×' + screen.height + '⚡', 80, 34);
+
+        ctx.font = '12px monospace'; ctx.fillStyle = '#ff0';
+        ctx.fillText(navigator.platform + '|' + navigator.hardwareConcurrency, 80, 56);
+
+        // Composite operation
+        ctx.globalCompositeOperation = 'difference';
+        ctx.fillStyle = '#fff'; ctx.fillRect(0,0,320,100);
+        ctx.globalCompositeOperation = 'source-over';
+
+        // Sub-pixel text
+        ctx.font = '9.5px sans-serif'; ctx.fillStyle = '#333';
+        ctx.fillText('subpx', 2.3, 78.7);
+
+        parts.push(c.toDataURL());
+        // Also push raw pixel hash subset
+        const d = ctx.getImageData(0,0,320,100).data;
+        let ph = 0;
+        for (let i=0;i<d.length;i+=16) ph = ((ph<<5)-ph) + d[i];
+        parts.push(ph);
+      } catch(e) { push('c2d:err'); }
+
+      // ── WebGL ──
+      try {
+        const gl = document.createElement('canvas').getContext('webgl') ||
+                   document.createElement('canvas').getContext('experimental-webgl');
+        if (gl) {
+          const ext = gl.getExtension('WEBGL_debug_renderer_info');
+          if (ext) {
+            push(gl.getParameter(ext.UNMASKED_VENDOR_WEBGL));
+            push(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL));
+          }
+          push(gl.getParameter(gl.VERSION));
+          push(gl.getParameter(gl.RENDERER));
+          push(gl.getParameter(gl.VENDOR));
+          push(gl.getParameter(gl.SHADING_LANGUAGE_VERSION));
+          push(gl.getParameter(gl.MAX_TEXTURE_SIZE));
+          push(gl.getParameter(gl.MAX_CUBE_MAP_TEXTURE_SIZE));
+          push(gl.getParameter(gl.MAX_RENDERBUFFER_SIZE));
+          push(gl.getParameter(gl.MAX_VERTEX_ATTRIBS));
+          push(gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS));
+          push(gl.getParameter(gl.MAX_VERTEX_TEXTURE_IMAGE_UNITS));
+          push(gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS));
+          push(gl.getParameter(gl.MAX_VIEWPORT_DIMS).join(','));
+          push(gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE).join(','));
+          push(gl.getParameter(gl.ALIASED_LINE_WIDTH_RANGE).join(','));
+          push(gl.getSupportedExtensions().sort().join(','));
+        }
+      } catch(e) { push('webgl:err'); }
+
+      // ── WebGL2 ──
+      try {
+        const gl2 = document.createElement('canvas').getContext('webgl2');
+        if (gl2) {
+          push(gl2.getParameter(gl2.MAX_SAMPLES));
+          push(gl2.getParameter(gl2.MAX_CLIENT_WAIT_TIMEOUT_WEBGL));
+          const ext2 = gl2.getExtension('WEBGL_debug_renderer_info');
+          if (ext2) {
+            push(gl2.getParameter(ext2.UNMASKED_VENDOR_WEBGL));
+            push(gl2.getParameter(ext2.UNMASKED_RENDERER_WEBGL));
+          }
+        }
+      } catch(e) { /* ok */ }
+
+      // ── Audio (AnalyserNode based) ──
+      try {
+        const ac = new (window.AudioContext || window.webkitAudioContext)();
+
+        const osc = ac.createOscillator();
+        osc.type = 'sawtooth';
+        osc.frequency.value = 440;
+
+        const gain = ac.createGain();
+        gain.gain.value = 0.1;
+
+        const analyser = ac.createAnalyser();
+        analyser.fftSize = 256;
+
+        osc.connect(gain); gain.connect(analyser); analyser.connect(ac.destination);
+        osc.start();
+
+        const freqData = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(freqData);
+        let fh = 0;
+        for (let i=0;i<freqData.length;i++) fh = ((fh<<5)-fh) + freqData[i];
+
+        const timeData = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteTimeDomainData(timeData);
+        let th = 0;
+        for (let i=0;i<timeData.length;i++) th = ((th<<5)-th) + timeData[i];
+
+        osc.stop(); ac.close();
+        push(fh); push(th);
+        push(ac.sampleRate);
+        push(ac.baseLatency !== undefined ? ac.baseLatency : '');
+        push(ac.outputLatency !== undefined ? ac.outputLatency : '');
+      } catch(e) { push('audio:err'); }
+
+      // ── Battery API ──
+      try {
+        const b = await navigator.getBattery();
+        push(b.charging);
+        push(b.level);
+        push(b.chargingTime);
+        push(b.dischargingTime);
+      } catch(e) { push('bat:err'); }
+
+      // ── Network info ──
+      try {
+        const nc = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        if (nc) {
+          push(nc.effectiveType);
+          push(nc.downlink);
+          push(nc.rtt);
+          push(nc.saveData);
+        }
+      } catch(e) { push('net:err'); }
+
+      // ── Storage estimate ──
+      try {
+        const st = await navigator.storage.estimate();
+        push(st.quota);
+        push(st.usage);
+      } catch(e) { push('sto:err'); }
+
+      // ── Speech voices ──
+      try {
+        const voices = await new Promise(res => {
+          const v = speechSynthesis.getVoices();
+          if (v.length) res(v);
+          else speechSynthesis.onvoiceschanged = () => res(speechSynthesis.getVoices());
+        });
+        push(voices.map(v=>v.name+v.lang+v.voiceURI+v.localService).join('||'));
+      } catch(e) { push('voice:err'); }
+
+      // ── Performance / memory ──
+      try {
+        if (performance.memory) {
+          push(performance.memory.jsHeapSizeLimit);
+          push(performance.memory.totalJSHeapSize);
+          push(performance.memory.usedJSHeapSize);
+        }
+        push(performance.timeOrigin);
+        push(performance.navigation ? performance.navigation.type : '');
+      } catch(e) { push('perf:err'); }
+
+      // ── Math precision ──
+      try {
+        push(Math.sin(Math.PI/3).toPrecision(17));
+        push(Math.cos(Math.PI/4).toPrecision(17));
+        push(Math.tan(Math.PI/6).toPrecision(17));
+        push(Math.asin(0.5).toPrecision(17));
+        push(Math.acos(0.3).toPrecision(17));
+        push(Math.atan(1).toPrecision(17));
+        push(Math.exp(1).toPrecision(17));
+        push(Math.log(2).toPrecision(17));
+        push(Math.sqrt(2).toPrecision(17));
+        push(Math.pow(Math.PI, Math.E).toPrecision(17));
+        // Float epsilon comparison
+        push(1.1+2.2 === 3.3);
+        push(0.1+0.2);
+      } catch(e) { push('math:err'); }
+
+      // ── CSS feature detection ──
+      try {
+        const tests = {
+          'backdrop-filter': CSS.supports('backdrop-filter','blur(1px)'),
+          'grid': CSS.supports('display','grid'),
+          'subgrid': CSS.supports('grid-template-columns','subgrid'),
+          'container': CSS.supports('container-type','inline-size'),
+          'dvh': CSS.supports('height','100dvh'),
+          'svh': CSS.supports('height','100svh'),
+          'lvh': CSS.supports('height','100lvh'),
+          'dvw': CSS.supports('width','100dvw'),
+          'accent-color': CSS.supports('accent-color','red'),
+          'aspect-ratio': CSS.supports('aspect-ratio','1'),
+          'overscroll-behavior': CSS.supports('overscroll-behavior','contain'),
+          'scroll-snap': CSS.supports('scroll-snap-type','x mandatory'),
+          'has-selector': CSS.supports('selector(:has(*))'),
+          'not-selector': CSS.supports('selector(:not(*))'),
+          'where-selector': CSS.supports('selector(:where(*))'),
+          'nesting': CSS.supports('selector(.a{.b{}})'),
+          'logical-props': CSS.supports('margin-inline-start','1px'),
+          'clamp': CSS.supports('width','clamp(1px,2px,3px)'),
+          'minmax': CSS.supports('width','minmax(1px,2px)'),
+          'color-mix': CSS.supports('color','color-mix(in srgb,red,blue)'),
+          'p3': CSS.supports('color','color(display-p3 1 0 0)'),
+        };
+        push(Object.values(tests).map(Number).join(''));
+      } catch(e) { push('css:err'); }
+
+      // ── Keyboard layout probe ──
+      try {
+        const inp = document.createElement('input');
+        inp.style.cssText = 'position:absolute;left:-9999px';
+        document.body.appendChild(inp);
+        inp.focus();
+        await new Promise(r => setTimeout(r, 50));
+        // Try detecting dead keys / layout by specific keys
+        push(inp.inputMode || '');
+        document.body.removeChild(inp);
+      } catch(e) { push('kbd:err'); }
+
+      // ── Plugins (legacy but still informative) ──
+      try {
+        const pl = [];
+        for (let i=0; i<navigator.plugins.length; i++) {
+          const p = navigator.plugins[i];
+          pl.push(p.name + '/' + p.filename + '/' + p.length);
+        }
+        push(pl.join(';'));
+      } catch(e) { push('plug:err'); }
+
+      // ── Touch / Pointer / Input ──
+      push('ontouchstart' in window);
+      push('onpointerdown' in window);
+      push(window.TouchEvent !== undefined);
+      push(window.PointerEvent !== undefined);
+      push(window.MSPointerEvent !== undefined);
+
+      // ── Device orientation / motion ──
+      push(!!window.DeviceOrientationEvent);
+      push(!!window.DeviceMotionEvent);
+
+      // ── Misc browser features ──
+      push(!!window.WebGLRenderingContext);
+      push(!!window.WebGL2RenderingContext);
+      push(!!window.Worker);
+      push(!!window.SharedWorker);
+      push(!!window.ServiceWorker);
+      push(!!window.caches);
+      push(!!window.indexedDB);
+      push(!!window.localStorage);
+      push(!!window.sessionStorage);
+      push(!!window.WebSocket);
+      push(!!window.RTCPeerConnection);
+      push(!!window.RTCDataChannel);
+      push(!!window.MediaStream);
+      push(!!window.AudioContext);
+      push(!!window.webkitAudioContext);
+      push(!!window.SpeechRecognition);
+      push(!!window.webkitSpeechRecognition);
+      push(!!window.speechSynthesis);
+      push(!!window.PerformanceObserver);
+      push(!!window.IntersectionObserver);
+      push(!!window.ResizeObserver);
+      push(!!window.MutationObserver);
+      push(!!window.FileReader);
+      push(!!window.Bluetooth);
+      push(!!window.USB);
+      push(!!window.serial);
+      push(!!window.WakeLock);
+      push(!!window.Clipboard);
+      push(!!window.NFC);
+      push(!!window.ContactPicker);
+      push(!!window.SMS);
+      push(!!window.CredentialManagement);
+
+      // ── Color gamut / HDR ──
+      try {
+        const mq = matchMedia('(color-gamut: srgb)');
+        push(mq.matches);
+        push(matchMedia('(color-gamut: p3)').matches);
+        push(matchMedia('(color-gamut: rec2020)').matches);
+        push(matchMedia('(dynamic-range: high)').matches);
+        push(matchMedia('(prefers-color-scheme: dark)').matches);
+        push(matchMedia('(prefers-reduced-motion: reduce)').matches);
+        push(matchMedia('(prefers-contrast: high)').matches);
+        push(matchMedia('(inverted-colors: inverted)').matches);
+        push(matchMedia('(pointer: fine)').matches);
+        push(matchMedia('(pointer: coarse)').matches);
+        push(matchMedia('(hover: hover)').matches);
+        push(matchMedia('(hover: none)').matches);
+        push(matchMedia('(any-pointer: fine)').matches);
+        push(matchMedia('(any-pointer: coarse)').matches);
+        push(matchMedia('(any-hover: hover)').matches);
+      } catch(e) { push('mq:err'); }
+
+      // ── Font detection (extended set) ──
+      try {
+        const testFonts = [
+          'Arial','Helvetica','Times New Roman','Courier New','Georgia','Verdana',
+          'Comic Sans MS','Impact','Monaco','Segoe UI','Roboto','Calibri','Cabin',
+          'Trebuchet MS','Lucida Console','Tahoma','Geneva','Palatino','Bookman',
+          'Futura','Optima','Cambria','Cambria Math','Candara','Droid Sans',
+          'Droid Serif','Ubuntu','Arial Black','Franklin Gothic Medium','Arial Narrow',
+          'Gill Sans','Goudy Old Style','Perpetua','Rockwell','Bodoni MT',
+          'Franklin Gothic','Century Gothic','Lucida Sans','Segoe Print','Segoe Script',
+          'Corbel','MS Sans Serif','MS Serif','Noto Sans','Noto Serif','Open Sans',
+          'Lato','Montserrat','Source Sans Pro','Raleway','Merriweather','Playfair Display'
+        ];
+        const base = document.createElement('span');
+        base.style.cssText = 'position:absolute;left:-9999px;font-size:72px;visibility:hidden;white-space:nowrap';
+        base.textContent = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        document.body.appendChild(base);
+        const baseW = base.offsetWidth;
+        const available = testFonts.filter(f => {
+          base.style.fontFamily = `"${f}", monospace`;
+          return base.offsetWidth !== baseW;
+        });
+        document.body.removeChild(base);
+        push(available.join(','));
+      } catch(e) { push('font:err'); }
+
+      // ── WebRTC local IP (if accessible) ──
+      try {
+        const pc = new RTCPeerConnection({ iceServers: [] });
+        pc.createDataChannel('');
+        const ip = await new Promise(res => {
+          pc.onicecandidate = e => {
+            if (!e.candidate) return res('');
+            const m = e.candidate.candidate.match(/(\d+\.\d+\.\d+\.\d+)/);
+            if (m) res(m[1]);
+          };
+          pc.createOffer().then(o => pc.setLocalDescription(o));
+          setTimeout(() => res(''), 500);
+        });
+        pc.close();
+        push(ip);
+      } catch(e) { push('webrtc:err'); }
+
+      // ── Guaranteed unique marker ──
+      push(crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now());
+
+      // ── Final hash ──
+      const raw = parts.join('|');
+      let hash = 0;
+      for (let i = 0; i < raw.length; i++) {
+        const c = raw.charCodeAt(i);
+        hash = ((hash << 5) - hash) + c;
+        hash = hash & hash;
+      }
+      const fp = (hash >>> 0).toString(36).padStart(7, '0') + '-' + crypto.randomUUID().slice(0,8);
+      localStorage.setItem('user_fp', fp);
+      return fp;
+    }
+    const userFP = await generateFingerprint();
+
+    // ── Supabase ──
+    const SUPABASE_URL = 'https://eunvrbrlyijfmmzruvla.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1bnZyYnJseWlqZm1tenJ1dmxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwNzMwOTMsImV4cCI6MjA5ODY0OTA5M30._2xPgeRfOwHYANUF8LPZSviUgIEV0-OS9O8Zl9-PWL0';
+    const SB = {
+      async insert(table, data) {
+        const r = await fetch(SUPABASE_URL + '/rest/v1/' + table, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Prefer': 'return=representation', apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY }, body: JSON.stringify(data) });
+        const t = await r.text();
+        try { return JSON.parse(t)[0]; } catch { return null; }
+      },
+      async select(table, opts) {
+        let url = SUPABASE_URL + '/rest/v1/' + table + '?select=*';
+        if (opts?.order) url += '&order=' + opts.order;
+        if (opts?.filter) { const f = opts.filter; url += '&' + f.field + '=eq.' + encodeURIComponent(f.value); }
+        const r = await fetch(url, { headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY } });
+        return r.json();
+      },
+      async deleteBy(table, field, value) {
+        const r = await fetch(SUPABASE_URL + '/rest/v1/' + table + '?' + field + '=eq.' + encodeURIComponent(value), { method: 'DELETE', headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY } });
+        return r.json();
+      },
+    };
+
+    const optionsScreen = document.getElementById('optionsScreen');
+    const chatScreen = document.getElementById('chatScreen');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const backBtn = document.getElementById('backBtn');
+    const chatTitle = document.getElementById('chatTitle');
+    const chatAvatar = document.getElementById('chatAvatar');
+
+    let currentOption = null;
+    let isBotResponding = false;
+    const chatHistory = {};
+
+    function persistChatHistory() {
+      if (currentOption && chatMessages.innerHTML.trim()) {
+        chatHistory[currentOption] = chatMessages.innerHTML;
+      }
+      try { localStorage.setItem('chats_' + userFP, JSON.stringify(chatHistory)); } catch {}
+    }
+    function restoreChatHistory() {
+      try { const d = JSON.parse(localStorage.getItem('chats_' + userFP)); if (d) Object.assign(chatHistory, d); } catch {}
+    }
+    restoreChatHistory();
+
+    // --- Chat flows per option ---
+    const flows = {
+      withdrawal: {
+        title: 'Withdrawal Issue',
+        avatar: '💳',
+        steps: [
+          { role: 'bot', text: 'Hi! I can help you with withdrawal issues. Please tell me what\'s going on:' },
+          { role: 'bot', text: 'Please describe your issue in detail so I can help you better.' },
+        ],
+      },
+      account: {
+        title: 'Account Issue',
+        avatar: '🔒',
+        steps: [
+          { role: 'bot', text: 'Hi! Let\'s fix your account issue. What seems to be the problem?' },
+          { role: 'bot', text: 'Please describe your account issue and I\'ll be happy to help.' },
+        ],
+      },
+      promotion: {
+        title: 'Promotion & Marketing',
+        avatar: '📈',
+        steps: [
+          { role: 'bot', text: 'Great! Let\'s grow your reach. What kind of promotion help do you need?' },
+          { role: 'bot', text: 'Tell me what you\'re looking for and I\'ll help you find the best approach.' },
+        ],
+      },
+    };
+
+    // --- Switch to chat ---
+    function openChat(optionKey) {
+      if (currentOption && chatMessages.innerHTML.trim()) {
+        chatHistory[currentOption] = chatMessages.innerHTML;
+      }
+      persistChatHistory();
+      currentOption = optionKey;
+      const flow = flows[optionKey];
+      chatTitle.textContent = flow.title;
+      chatAvatar.textContent = flow.avatar;
+      chatMessages.innerHTML = '';
+
+      optionsScreen.classList.remove('active');
+      chatScreen.classList.add('active');
+
+      if (chatHistory[optionKey]) {
+        chatMessages.innerHTML = chatHistory[optionKey];
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        // Fetch any new team replies from backend
+        SB.select('messages', { filter: { field: 'fingerprint', value: userFP }, order: 'created_at.asc' }).then(msgs => {
+          if (!msgs || !msgs.length) return;
+          // Filter by category AND sender=team
+          const teamMsgs = msgs.filter(m => m.sender === 'team' && m.category === currentOption);
+          if (!teamMsgs.length) return;
+          // Check which are already shown
+          for (const tm of teamMsgs) {
+            if (!chatMessages.innerHTML.includes(tm.text)) {
+              const div = document.createElement('div');
+              div.className = 'msg team';
+              const s = document.createElement('span');
+              s.className = 's';
+              s.textContent = 'Team';
+              div.appendChild(s);
+              if (tm.image) {
+                const img = document.createElement('img');
+                img.className = 'msg-image';
+                img.src = tm.image;
+                img.style.maxWidth = '200px';
+                img.style.maxHeight = '200px';
+                img.style.borderRadius = '8px';
+                img.style.cursor = 'pointer';
+                img.style.display = 'block';
+                img.style.marginTop = '4px';
+                img.addEventListener('click', () => openImageViewer(tm.image, 'team'));
+                if (tm.text.replace('[Image]','').replace(/^:\s*/,'')) {
+                  const cap = document.createElement('div');
+                  cap.textContent = tm.text.replace('[Image]','').replace(/^:\s*/,'');
+                  div.appendChild(cap);
+                }
+                div.appendChild(img);
+              } else {
+                div.textContent = tm.text;
+              }
+              chatMessages.appendChild(div);
+            }
+          }
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+          persistChatHistory();
+        }).catch(() => {});
+      } else {
+        chatHistory[optionKey] = '';
+        let delay = 0;
+        flow.steps.forEach((msg) => {
+          delay += 600;
+          setTimeout(() => addBotMessage(msg), delay);
+        });
+        setTimeout(() => {
+          chatInput.focus();
+        }, delay + 100);
+      }
+    }
+
+    // --- Back to options ---
+    function goBack() {
+      if (currentOption && chatMessages.innerHTML.trim()) {
+        chatHistory[currentOption] = chatMessages.innerHTML;
+      }
+      persistChatHistory();
+      chatScreen.classList.remove('active');
+      optionsScreen.classList.add('active');
+      chatMessages.innerHTML = '';
+      currentOption = null;
+      isBotResponding = false;
+      closeEditor();
+    }
+
+    // --- Add bot message ---
+    function addBotMessage(msg) {
+      const div = document.createElement('div');
+      div.className = 'msg bot';
+      div.textContent = msg.text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // --- Add user message ---
+    function addUserMessage(text) {
+      const div = document.createElement('div');
+      div.className = 'msg user';
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // --- Show typing indicator ---
+    function showTyping() {
+      const div = document.createElement('div');
+      div.className = 'typing';
+      div.id = 'typingIndicator';
+      div.innerHTML = '<span></span><span></span><span></span>';
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function hideTyping() {
+      const el = document.getElementById('typingIndicator');
+      if (el) el.remove();
+    }
+
+    // --- Send text message ---
+    async function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text || isBotResponding) return;
+
+      addUserMessage(text);
+      persistChatHistory();
+      chatInput.value = '';
+      chatInput.style.height = '42px'; // Reset height
+      isBotResponding = true;
+
+      try {
+        const existing = await SB.select('messages', { filter: { field: 'fingerprint', value: userFP } });
+        const isFirst = !existing || existing.length === 0;
+        await SB.insert('messages', { fingerprint: userFP, sender: 'user', text, category: currentOption || 'general', sender_fp: userFP });
+
+        if (isFirst) {
+          showTyping();
+          setTimeout(() => {
+            hideTyping();
+            const botText = 'Thanks for your message! Our team will review this and get back to you shortly. If it\'s urgent, please use our helpline number.';
+            addBotMessage({ role: 'bot', text: botText });
+            persistChatHistory();
+            isBotResponding = false;
+          }, 1200);
+        } else {
+          isBotResponding = false;
+        }
+      } catch {
+        isBotResponding = false;
+      }
+    }
+
+    function addImageMessage(file, role, caption) {
+      role = role || 'user';
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const div = document.createElement('div');
+          div.className = 'msg ' + role;
+          div.style.padding = '4px';
+          div.style.background = 'transparent';
+          div.style.alignSelf = role === 'user' ? 'flex-end' : 'flex-start';
+          div.style.textAlign = 'center';
+          const img = document.createElement('img');
+          img.className = 'msg-image';
+          img.style.display = 'inline-block';
+          img.src = e.target.result;
+          img.alt = 'Sent image';
+          img.dataset.role = role;
+          img.addEventListener('click', () => openImageViewer(e.target.result, role));
+          div.appendChild(img);
+          if (caption) {
+            const cap = document.createElement('div');
+            cap.className = 'msg-image-caption';
+            cap.textContent = caption;
+            div.appendChild(cap);
+          }
+          chatMessages.appendChild(div);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+          persistChatHistory();
+          if (role === 'user' && userFP) {
+            SB.insert('messages', { fingerprint: userFP, sender: 'user', text: '[Image]' + (caption ? ': ' + caption : ''), category: currentOption || 'general', image: e.target.result, sender_fp: userFP }).catch(() => {});
+          }
+          resolve();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    let viewerImages = [];
+    let viewerIndex = 0;
+    let viewerScale = 1;
+    let viewerTx = 0;
+    let viewerTy = 0;
+    let viewerTouchStartX = 0;
+    let viewerTouchStartY = 0;
+    let viewerStartTx = 0;
+    let viewerStartTy = 0;
+    let viewerStartScale = 1;
+    let viewerPinchDist = 0;
+    let viewerPinchCenterX = 0;
+    let viewerPinchCenterY = 0;
+    let viewerSwiping = false;
+    let viewerSwipeStartX = 0;
+    let viewerLastTap = 0;
+    const viewerBody = document.querySelector('.img-viewer-body');
+
+    function openImageViewer(src, role) {
+      viewerImages = Array.from(document.querySelectorAll('.msg-image')).map(img => ({ src: img.src, role: img.dataset.role }));
+      viewerIndex = viewerImages.findIndex(i => i.src === src);
+      if (viewerIndex < 0) viewerIndex = 0;
+      viewerScale = 1; viewerTx = 0; viewerTy = 0;
+      showViewerImage();
+      document.getElementById('imgViewer').classList.add('show');
+    }
+
+    function clampPan() {
+      const img = document.getElementById('ivImage');
+      const cw = viewerBody.clientWidth;
+      const ch = viewerBody.clientHeight;
+      const nw = img.naturalWidth || cw;
+      const nh = img.naturalHeight || ch;
+      const dispW = nw * viewerScale;
+      const dispH = nh * viewerScale;
+      const maxTx = Math.max(0, (dispW - cw) / 2);
+      const maxTy = Math.max(0, (dispH - ch) / 2);
+      viewerTx = Math.max(-maxTx, Math.min(maxTx, viewerTx));
+      viewerTy = Math.max(-maxTy, Math.min(maxTy, viewerTy));
+    }
+
+    function applyViewerTransform() {
+      const img = document.getElementById('ivImage');
+      img.classList.toggle('zoomed', viewerScale > 1);
+      if (viewerScale > 1) clampPan(); else { viewerTx = 0; viewerTy = 0; }
+      img.style.transform = `translate(calc(-50% + ${viewerTx}px), calc(-50% + ${viewerTy}px)) scale(${viewerScale})`;
+    }
+
+    function showViewerImage() {
+      const img = document.getElementById('ivImage');
+      if (viewerImages[viewerIndex]) {
+        img.src = viewerImages[viewerIndex].src;
+        viewerScale = 1; viewerTx = 0; viewerTy = 0;
+        img.style.transform = 'translate(-50%, -50%) scale(1)';
+        img.classList.remove('zoomed');
+        document.getElementById('ivTitle').textContent = `Image ${viewerIndex + 1}/${viewerImages.length}`;
+        document.getElementById('ivSender').textContent = viewerImages[viewerIndex].role === 'user' ? 'You' : 'Support';
+      }
+    }
+
+    viewerBody.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        viewerTouchStartX = e.touches[0].clientX;
+        viewerTouchStartY = e.touches[0].clientY;
+        viewerStartTx = viewerTx;
+        viewerStartTy = viewerTy;
+        viewerStartScale = viewerScale;
+        viewerSwipeStartX = e.touches[0].clientX;
+        viewerSwiping = viewerScale <= 1;
+      } else if (e.touches.length === 2) {
+        viewerPinchDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        viewerStartScale = viewerScale;
+        viewerStartTx = viewerTx;
+        viewerStartTy = viewerTy;
+        viewerPinchCenterX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        viewerPinchCenterY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      }
+    }, { passive: true });
+
+    viewerBody.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const rect = viewerBody.getBoundingClientRect();
+        const pinchRelX = viewerPinchCenterX - rect.left - rect.width / 2;
+        const pinchRelY = viewerPinchCenterY - rect.top - rect.height / 2;
+        const dist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        const newScale = Math.max(0.5, Math.min(5, viewerStartScale * (dist / viewerPinchDist)));
+        const actualRatio = newScale / viewerStartScale;
+        viewerTx = pinchRelX * (1 - actualRatio) + viewerStartTx * actualRatio;
+        viewerTy = pinchRelY * (1 - actualRatio) + viewerStartTy * actualRatio;
+        viewerScale = newScale;
+        applyViewerTransform();
+      } else if (e.touches.length === 1 && viewerScale > 1) {
+        e.preventDefault();
+        viewerTx = viewerStartTx + (e.touches[0].clientX - viewerTouchStartX);
+        viewerTy = viewerStartTy + (e.touches[0].clientY - viewerTouchStartY);
+        applyViewerTransform();
+      } else if (e.touches.length === 1 && viewerScale <= 1 && viewerSwiping) {
+        e.preventDefault();
+        const dx = e.touches[0].clientX - viewerSwipeStartX;
+        document.getElementById('ivImage').style.transform = `translate(calc(-50% + ${dx * 0.3}px), -50%) scale(1)`;
+      }
+    }, { passive: false });
+
+    viewerBody.addEventListener('touchend', (e) => {
+      if (e.touches.length === 1) {
+        viewerTouchStartX = e.touches[0].clientX;
+        viewerTouchStartY = e.touches[0].clientY;
+        viewerStartTx = viewerTx;
+        viewerStartTy = viewerTy;
+        viewerStartScale = viewerScale;
+      }
+      if (e.changedTouches.length === 1 && viewerScale <= 1) {
+        const dx = e.changedTouches[0].clientX - viewerSwipeStartX;
+        if (Math.abs(dx) > 50) {
+          if (dx > 0 && viewerIndex > 0) { viewerIndex--; showViewerImage(); }
+          else if (dx < 0 && viewerIndex < viewerImages.length - 1) { viewerIndex++; showViewerImage(); }
+          else { applyViewerTransform(); }
+        } else {
+          applyViewerTransform();
+        }
+      }
+      if (e.changedTouches.length === 1) {
+        const now = Date.now();
+        if (now - viewerLastTap < 300 && now - viewerLastTap > 50) {
+          if (viewerScale > 1.5) { viewerScale = 1; viewerTx = 0; viewerTy = 0; }
+          else {
+            const rect = viewerBody.getBoundingClientRect();
+            const tapRelX = e.changedTouches[0].clientX - rect.left - rect.width / 2;
+            const tapRelY = e.changedTouches[0].clientY - rect.top - rect.height / 2;
+            const tapRatio = 3 / viewerScale;
+            viewerTx = tapRelX * (1 - tapRatio) + viewerTx * tapRatio;
+            viewerTy = tapRelY * (1 - tapRatio) + viewerTy * tapRatio;
+            viewerScale = 3;
+          }
+          applyViewerTransform();
+          viewerLastTap = 0;
+          return;
+        }
+        viewerLastTap = now;
+      }
+    }, { passive: true });
+
+    // Mouse wheel zoom — centered on cursor
+    viewerBody.addEventListener('wheel', (e) => {
+      if (!document.getElementById('imgViewer').classList.contains('show')) return;
+      e.preventDefault();
+      const rect = viewerBody.getBoundingClientRect();
+      const mouseRelX = e.clientX - rect.left - rect.width / 2;
+      const mouseRelY = e.clientY - rect.top - rect.height / 2;
+      const ratio = e.deltaY > 0 ? 0.9 : 1.1;
+      const newScale = Math.max(0.5, Math.min(5, viewerScale * ratio));
+      const actualRatio = newScale / viewerScale;
+      viewerTx = mouseRelX * (1 - actualRatio) + viewerTx * actualRatio;
+      viewerTy = mouseRelY * (1 - actualRatio) + viewerTy * actualRatio;
+      viewerScale = newScale;
+      applyViewerTransform();
+    }, { passive: false });
+
+    // Mouse drag pan
+    let viewerMouseDown = false, viewerMouseStartX = 0, viewerMouseStartY = 0, viewerMouseTx = 0, viewerMouseTy = 0;
+    viewerBody.addEventListener('mousedown', (e) => {
+      if (!document.getElementById('imgViewer').classList.contains('show')) return;
+      viewerMouseDown = true;
+      viewerMouseStartX = e.clientX;
+      viewerMouseStartY = e.clientY;
+      viewerMouseTx = viewerTx;
+      viewerMouseTy = viewerTy;
+    });
+    document.addEventListener('mousemove', (e) => {
+      if (!viewerMouseDown) return;
+      if (viewerScale > 1) {
+        viewerTx = viewerMouseTx + (e.clientX - viewerMouseStartX);
+        viewerTy = viewerMouseTy + (e.clientY - viewerMouseStartY);
+        applyViewerTransform();
+      }
+    });
+    document.addEventListener('mouseup', () => { viewerMouseDown = false; });
+
+    document.getElementById('ivBack').addEventListener('click', closeImageViewer);
+    document.addEventListener('keydown', (e) => {
+      if (!document.getElementById('imgViewer').classList.contains('show')) return;
+      if (e.key === 'Escape') closeImageViewer();
+      if (e.key === 'ArrowLeft' && viewerIndex > 0) { viewerIndex--; showViewerImage(); }
+      if (e.key === 'ArrowRight' && viewerIndex < viewerImages.length - 1) { viewerIndex++; showViewerImage(); }
+    });
+    function closeImageViewer() {
+      document.getElementById('imgViewer').classList.remove('show');
+      viewerScale = 1; viewerTx = 0; viewerTy = 0;
+    }
+
+    // --- WhatsApp-style Image Editor ---
+    const imageInput = document.getElementById('imageInput');
+    const attachBtn = document.getElementById('attachBtn');
+    const imgEditor = document.getElementById('imgEditor');
+    const ieImage = document.getElementById('ieImage');
+    const ieImageWrap = document.getElementById('ieImageWrap');
+    const ieImageArea = document.getElementById('ieImageArea');
+    const ieCounter = document.getElementById('ieCounter');
+    const ieCaption = document.getElementById('ieCaption');
+    const ieSendBtn = document.getElementById('ieSendBtn');
+    const ieColorBtns = document.querySelectorAll('.ie-color-btn');
+    let editImages = [];
+    let editIndex = 0;
+    let editMode = 'none';
+    let editCanvas = null;
+    let editCtx = null;
+    let editUndoStack = [];
+    let editRedoStack = [];
+    let imageCaptions = [];
+    let imageDrawings = []; // per-image drawing layer snapshots
+    let editColor = '#ffffff';
+    let arrowObjects = []; // per-image array of {x1,y1,x2,y2,color}
+    let isDrawingArrow = false;
+    let arrowStart = null;
+
+    attachBtn.addEventListener('click', () => imageInput.click());
+
+    imageInput.addEventListener('change', (e) => {
+      const files = Array.from(e.target.files);
+      editImages = files;
+      editIndex = 0;
+      imageCaptions = files.map(() => '');
+      imageDrawings = files.map(() => null);
+      arrowObjects = files.map(() => []);
+      imageInput.value = '';
+      if (editImages.length > 0) openEditor();
+    });
+
+    document.getElementById('ieBack').addEventListener('click', closeEditor);
+    document.getElementById('ieDeleteImg').addEventListener('click', () => {
+      editImages.splice(editIndex, 1);
+      imageCaptions.splice(editIndex, 1);
+      imageDrawings.splice(editIndex, 1);
+      arrowObjects.splice(editIndex, 1);
+      if (editImages.length === 0) { closeEditor(); return; }
+      if (editIndex >= editImages.length) editIndex = editImages.length - 1;
+      loadEditImage(editIndex);
+    });
+
+    function openEditor() {
+      imgEditor.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      setMode('none');
+      editUndoStack = [];
+      document.getElementById('ieColors').classList.add('hidden');
+      loadEditImage(editIndex);
+    }
+
+    function closeEditor() {
+      imgEditor.classList.remove('show');
+      document.body.style.overflow = '';
+      editImages = [];
+      editIndex = 0;
+      imageCaptions = [];
+      imageDrawings = [];
+      arrowObjects = [];
+      document.getElementById('ieColors').classList.add('hidden');
+      if (editCanvas) { editCanvas.remove(); editCanvas = null; editCtx = null; }
+    }
+
+    function loadEditImage(index) {
+      const file = editImages[index];
+      if (!file) return;
+      // Save current drawing before switching
+      if (drawLayer && editIndex < imageDrawings.length) {
+        imageDrawings[editIndex] = drawLayer.getContext('2d').getImageData(0, 0, drawLayer.width, drawLayer.height);
+      }
+      imageCaptions[editIndex] = ieCaption.value;
+      editIndex = index;
+      ieCaption.value = imageCaptions[index] || '';
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        ieImage.src = e.target.result;
+        ieImage.style.transform = '';
+        ieCounter.textContent = `${index + 1}/${editImages.length}`;
+        ieImage.onload = () => {
+          setupEditCanvas();
+          // Restore this image's drawing
+          if (imageDrawings[editIndex]) {
+            const dc = drawLayer.getContext('2d');
+            dc.putImageData(imageDrawings[editIndex], 0, 0);
+          } else {
+            const dc = drawLayer.getContext('2d');
+            dc.clearRect(0, 0, drawLayer.width, drawLayer.height);
+          }
+          redrawScene();
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function setMode(mode) {
+      editMode = mode;
+      document.getElementById('ieToolArrow').classList.toggle('active', mode === 'arrow');
+      document.getElementById('ieColors').classList.toggle('hidden', mode !== 'arrow');
+      if (editCanvas) editCanvas.style.cursor = mode === 'arrow' ? 'crosshair' : 'default';
+      if (mode !== 'arrow') redrawScene();
+    }
+
+    function setupEditCanvas() {
+      const old = document.querySelector('.ie-canvas-overlay');
+      if (old) old.remove();
+      editCanvas = document.createElement('canvas');
+      editCanvas.className = 'ie-canvas-overlay';
+      editCtx = editCanvas.getContext('2d');
+      ieImageArea.appendChild(editCanvas);
+      resizeCanvas();
+      // Init drawLayer — preserve existing content if size matches
+      if (!drawLayer) drawLayer = document.createElement('canvas');
+      if (drawLayer.width !== editCanvas.width || drawLayer.height !== editCanvas.height) {
+        const oldContent = document.createElement('canvas');
+        oldContent.width = drawLayer.width; oldContent.height = drawLayer.height;
+        oldContent.getContext('2d').drawImage(drawLayer, 0, 0);
+        drawLayer.width = editCanvas.width;
+        drawLayer.height = editCanvas.height;
+        drawLayer.getContext('2d').drawImage(oldContent, 0, 0);
+      }
+
+      // Swipe images
+      let touchStartX = 0;
+      editCanvas.addEventListener('touchstart', (e) => {
+        if (editMode !== 'none') return;
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      editCanvas.addEventListener('touchend', (e) => {
+        if (editMode !== 'none') return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) {
+          imageCaptions[editIndex] = ieCaption.value;
+          // Save current drawing before switching
+          if (drawLayer) imageDrawings[editIndex] = drawLayer.getContext('2d').getImageData(0, 0, drawLayer.width, drawLayer.height);
+          if (dx > 0 && editIndex > 0) { editIndex--; loadEditImage(editIndex); }
+          else if (dx < 0 && editIndex < editImages.length - 1) { editIndex++; loadEditImage(editIndex); }
+        }
+      }, { passive: true });
+
+      // Mouse events
+      editCanvas.addEventListener('mousedown', (e) => {
+        const p = getEditPos(e);
+        if (editMode === 'arrow') { startArrow(p); return; }
+      });
+      editCanvas.addEventListener('mousemove', (e) => {
+        const p = getEditPos(e);
+        if (isDrawingArrow && editMode === 'arrow') { doArrow(p); return; }
+      });
+      const endAll = () => { endArrow(); };
+      editCanvas.addEventListener('mouseup', endAll);
+      editCanvas.addEventListener('mouseleave', endAll);
+
+      // Touch events
+      editCanvas.addEventListener('touchstart', (e) => {
+        if (editMode === 'none') return;
+        e.preventDefault();
+        const p = getEditPos(e);
+        if (editMode === 'arrow') { startArrow(p); return; }
+      }, { passive: false });
+      editCanvas.addEventListener('touchmove', (e) => {
+        if (editMode === 'none') return;
+        e.preventDefault();
+        const p = getEditPos(e);
+        if (isDrawingArrow && editMode === 'arrow') { doArrow(p); return; }
+      }, { passive: false });
+      editCanvas.addEventListener('touchend', (e) => {
+        endArrow();
+      }, { passive: false });
+
+      const ro = new ResizeObserver(() => {
+        resizeCanvas();
+      });
+      ro.observe(ieImageArea);
+    }
+
+    // --- Utils ---
+    function resizeCanvas() {
+      if (!editCanvas) return;
+      const r = editCanvas.getBoundingClientRect();
+      const cw = Math.round(r.width), ch = Math.round(r.height);
+      if (cw < 10 || ch < 10) return;
+      if (editCanvas.width === cw && editCanvas.height === ch) return;
+      if (drawLayer) {
+        const tmp = document.createElement('canvas');
+        tmp.width = drawLayer.width; tmp.height = drawLayer.height;
+        tmp.getContext('2d').drawImage(drawLayer, 0, 0);
+        drawLayer.width = cw; drawLayer.height = ch;
+        drawLayer.getContext('2d').drawImage(tmp, 0, 0);
+      }
+      editCanvas.width = cw; editCanvas.height = ch;
+      redrawScene();
+    }
+
+    // --- Draw ---
+    let drawLayer = null; // offscreen canvas for drawing strokes only
+
+    function initDrawLayer() {
+      if (!drawLayer) drawLayer = document.createElement('canvas');
+      if (editCanvas && (drawLayer.width !== editCanvas.width || drawLayer.height !== editCanvas.height)) {
+        const tmp = document.createElement('canvas');
+        tmp.width = drawLayer.width; tmp.height = drawLayer.height;
+        tmp.getContext('2d').drawImage(drawLayer, 0, 0);
+        drawLayer.width = editCanvas.width;
+        drawLayer.height = editCanvas.height;
+        drawLayer.getContext('2d').drawImage(tmp, 0, 0);
+      }
+    }
+
+    function saveUndoState() {
+      if (!editCanvas) return;
+      initDrawLayer();
+      const entry = {
+        drawData: drawLayer.getContext('2d').getImageData(0, 0, drawLayer.width, drawLayer.height),
+        arrows: JSON.parse(JSON.stringify(arrowObjects[editIndex] || []))
+      };
+      editUndoStack.push(entry);
+      if (editUndoStack.length > 20) editUndoStack.shift();
+    }
+
+    function redrawScene() {
+      if (!editCtx || !editCanvas || !drawLayer) return;
+      editCtx.clearRect(0, 0, editCanvas.width, editCanvas.height);
+      editCtx.drawImage(drawLayer, 0, 0);
+      // Draw committed arrows
+      const arrows = arrowObjects[editIndex] || [];
+      arrows.forEach(a => {
+        drawArrowOnCtx(editCtx, a.x1, a.y1, a.x2, a.y2, a.color);
+      });
+    }
+
+
+    // --- Arrow (WhatsApp-style) ---
+    let arrowEnd = null;
+    function startArrow(p) {
+      isDrawingArrow = true;
+      arrowStart = { x: p.x, y: p.y };
+      arrowEnd = { x: p.x, y: p.y };
+    }
+    function doArrow(p) {
+      if (!isDrawingArrow) return;
+      arrowEnd = { x: p.x, y: p.y };
+      redrawScene();
+      drawArrowOnCtx(editCtx, arrowStart.x, arrowStart.y, arrowEnd.x, arrowEnd.y, editColor);
+    }
+    function endArrow() {
+      if (!isDrawingArrow) return;
+      isDrawingArrow = false;
+      if (arrowStart && arrowEnd) {
+        const dx = arrowEnd.x - arrowStart.x, dy = arrowEnd.y - arrowStart.y;
+        const len = Math.sqrt(dx * dx + dy * dy);
+        if (len > 10) {
+          saveUndoState();
+          arrowObjects[editIndex].push({ x1: arrowStart.x, y1: arrowStart.y, x2: arrowEnd.x, y2: arrowEnd.y, color: editColor });
+        }
+      }
+      arrowStart = null;
+      arrowEnd = null;
+      redrawScene();
+    }
+    function drawArrowOnCtx(ctx, x1, y1, x2, y2, color) {
+      const dx = x2 - x1, dy = y2 - y1;
+      const len = Math.sqrt(dx * dx + dy * dy);
+      if (len < 1) return;
+      const angle = Math.atan2(dy, dx);
+      const headLen = Math.min(16, len * 0.35);
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.fillStyle = color;
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+      // Arrowhead
+      ctx.beginPath();
+      ctx.moveTo(x2, y2);
+      ctx.lineTo(x2 - headLen * Math.cos(angle - 0.45), y2 - headLen * Math.sin(angle - 0.45));
+      ctx.lineTo(x2 - headLen * Math.cos(angle + 0.45), y2 - headLen * Math.sin(angle + 0.45));
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+    // Color buttons
+    ieColorBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        ieColorBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        editColor = btn.dataset.color;
+      });
+    });
+
+    // --- Common ---
+    function getImageBounds() {
+      const canvasRect = editCanvas.getBoundingClientRect();
+      const imgRect = ieImage.getBoundingClientRect();
+      return {
+        x: Math.max(0, imgRect.left - canvasRect.left),
+        y: Math.max(0, imgRect.top - canvasRect.top),
+        w: Math.min(canvasRect.width, imgRect.width),
+        h: Math.min(canvasRect.height, imgRect.height)
+      };
+    }
+
+    function wrapText(text, maxChars) {
+      const words = text.split(' ');
+      const lines = [];
+      let current = '';
+      for (const w of words) {
+        if ((current + ' ' + w).trim().length <= maxChars) {
+          current = (current + ' ' + w).trim();
+        } else {
+          if (current) lines.push(current);
+          current = w;
+          if (current.length > maxChars) {
+            while (current.length > maxChars) {
+              lines.push(current.slice(0, maxChars));
+              current = current.slice(maxChars);
+            }
+          }
+        }
+      }
+      if (current) lines.push(current);
+      return lines.slice(0, 5);
+    }
+
+    function getEditPos(e) {
+      const rect = editCanvas.getBoundingClientRect();
+      const t = e.touches ? e.touches[0] || e.changedTouches[0] : e;
+      let x = t.clientX - rect.left;
+      let y = t.clientY - rect.top;
+      if (editMode === 'arrow') {
+        const b = getImageBounds();
+        x = Math.max(b.x, Math.min(b.x + b.w, x));
+        y = Math.max(b.y, Math.min(b.y + b.h, y));
+      }
+      return { x, y };
+    }
+
+    // --- Tool buttons ---
+    document.getElementById('ieToolArrow').addEventListener('click', () => { setMode(editMode === 'arrow' ? 'none' : 'arrow'); });
+
+    // Undo handler
+    document.getElementById('ieToolUndo').addEventListener('click', () => {
+      if (editUndoStack.length === 0 || !editCanvas) return;
+      const state = editUndoStack.pop();
+      // Restore draw layer
+      const dc = drawLayer.getContext('2d');
+      dc.putImageData(state.drawData, 0, 0);
+      // Restore arrows
+      arrowObjects[editIndex] = state.arrows || [];
+      redrawScene();
+    });
+
+    // Done button — applies current tool action
+    document.getElementById('ieToolDone').addEventListener('click', () => {
+      if (editMode === 'arrow') setMode('none');
+      else setMode('none');
+    });
+
+    function renderEditedImage(index) {
+      return new Promise((resolve, reject) => {
+        const file = editImages[index];
+        if (!file) return reject(new Error('No file'));
+        const img = new Image();
+        img.onload = () => {
+          const origW = img.naturalWidth, origH = img.naturalHeight;
+          const canvasRect = editCanvas ? editCanvas.getBoundingClientRect() : ieImageArea.getBoundingClientRect();
+          const imgRect = ieImage.getBoundingClientRect();
+          const offsetX = imgRect.left - canvasRect.left;
+          const offsetY = imgRect.top - canvasRect.top;
+          const dispW = imgRect.width, dispH = imgRect.height;
+          const scaleX = origW / dispW, scaleY = origH / dispH;
+          const c = document.createElement('canvas');
+          c.width = origW;
+          c.height = origH;
+          const ctx = c.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          if (drawLayer) {
+            ctx.save();
+            ctx.translate(-offsetX * scaleX, -offsetY * scaleY);
+            ctx.scale(scaleX, scaleY);
+            ctx.drawImage(drawLayer, 0, 0);
+            ctx.restore();
+          }
+          // Draw arrows
+          const arrows = arrowObjects[index] || [];
+          arrows.forEach(a => {
+            const ax1 = (a.x1 - offsetX) * scaleX, ay1 = (a.y1 - offsetY) * scaleY;
+            const ax2 = (a.x2 - offsetX) * scaleX, ay2 = (a.y2 - offsetY) * scaleY;
+            const dx = ax2 - ax1, dy = ay2 - ay1;
+            const len = Math.sqrt(dx * dx + dy * dy);
+            if (len < 1) return;
+            const angle = Math.atan2(dy, dx);
+            const headLen = Math.min(16 * scaleX, len * 0.35);
+            ctx.save();
+            ctx.strokeStyle = a.color;
+            ctx.fillStyle = a.color;
+            ctx.lineWidth = 4 * scaleX;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(ax1, ay1);
+            ctx.lineTo(ax2, ay2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(ax2, ay2);
+            ctx.lineTo(ax2 - headLen * Math.cos(angle - 0.45), ay2 - headLen * Math.sin(angle - 0.45));
+            ctx.lineTo(ax2 - headLen * Math.cos(angle + 0.45), ay2 - headLen * Math.sin(angle + 0.45));
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+          });
+          c.toBlob((blob) => resolve(blob), 'image/jpeg', 0.9);
+        };
+        img.onerror = reject;
+        img.src = URL.createObjectURL(file);
+      });
+    }
+
+    function compressImage(file) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let w = img.width, h = img.height;
+          const maxDim = 1920;
+          if (w > maxDim || h > maxDim) {
+            const ratio = Math.min(maxDim / w, maxDim / h);
+            w = Math.round(w * ratio);
+            h = Math.round(h * ratio);
+          }
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          canvas.toBlob((blob) => {
+            if (!blob) return reject(new Error('Canvas to blob failed'));
+            resolve(new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' }));
+          }, 'image/jpeg', 0.85);
+        };
+        img.onerror = reject;
+        img.src = URL.createObjectURL(file);
+      });
+    }
+
+    // Send — image with caption
+    ieSendBtn.addEventListener('click', async () => {
+      const caption = ieCaption.value.trim();
+      try {
+        const blob = await renderEditedImage(editIndex);
+        if (!blob) throw new Error('renderEditedImage returned no blob');
+        const name = editImages[editIndex] ? editImages[editIndex].name.replace(/\.[^.]+$/, '.jpg') : 'image.jpg';
+        const file = new File([blob], name, { type: 'image/jpeg' });
+        const compressed = await compressImage(file);
+        const existing = await SB.select('messages', { filter: { field: 'fingerprint', value: userFP } });
+        const isFirst = !existing || existing.length === 0;
+        await addImageMessage(compressed, 'user', caption || '');
+        closeEditor();
+        if (isFirst) {
+          isBotResponding = true; showTyping();
+          setTimeout(() => { hideTyping(); addBotMessage({ role: 'bot', text: 'Thanks for the screenshot! Our team will review it and get back to you shortly.' }); persistChatHistory(); isBotResponding = false; }, 1200);
+        }
+      } catch (e) {
+        console.error('Image send failed', e);
+        closeEditor();
+      }
+    });
+
+
+    // --- Option button clicks ---
+    document.querySelectorAll('.option-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        openChat(btn.dataset.option);
+      });
+    });
+
+    // --- Back button ---
+    backBtn.addEventListener('click', goBack);
+
+    // --- Send events ---
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // --- Toggle send based on input and auto-grow height ---
+    chatInput.addEventListener('input', () => {
+      const hasText = chatInput.value.trim().length > 0;
+      sendBtn.classList.toggle('visible', hasText);
+      chatInput.style.height = '42px';
+      const scrollHeight = chatInput.scrollHeight;
+      if (scrollHeight > 42) {
+        chatInput.style.height = Math.min(scrollHeight, 120) + 'px';
+      }
+    });
+
+  });
+</script>
+</body>
+</html>
